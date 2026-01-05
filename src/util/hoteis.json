@@ -1,0 +1,1549 @@
+{
+  "hoteis": [
+    {
+      "value": "INTERCITY ANAPOLIS"
+    },
+    {
+      "value": "HOTEL RODA D AGUA"
+    },
+    {
+      "value": "HOTEL ACROPOLIS MARINA"
+    },
+    {
+      "value": "NACIONAL INN ANGRA DOS REIS "
+    },
+    {
+      "value": "PALACE HOTEL ANGRA"
+    },
+    {
+      "value": "SAMBA ANGRA DOS REIS"
+    },
+    {
+      "value": "AQUARIOS HOTEL"
+    },
+    {
+      "value": "ARCUS HOTEL ARACAJU BY ATLANTICA"
+    },
+    {
+      "value": "CELI HOTEL ARACAJU"
+    },
+    {
+      "value": "DELMAR HOTEL"
+    },
+    {
+      "value": "HOTEL GO INN ARACAJU"
+    },
+    {
+      "value": "IBIS ARACAJU"
+    },
+    {
+      "value": "IBIS BUDGET ARACAJU"
+    },
+    {
+      "value": "MAREZZI HOTEL"
+    },
+    {
+      "value": "REAL CLASSIC HOTEL"
+    },
+    {
+      "value": "SAN MANUEL PRAIA HOTEL"
+    },
+    {
+      "value": "SANDRIN PRAIA HOTEL"
+    },
+    {
+      "value": "NACIONAL INN ARACATUBA"
+    },
+    {
+      "value": "GO INN ARACRUZ"
+    },
+    {
+      "value": "POUSADA VILA NORA FLATS"
+    },
+    {
+      "value": "PINNA HOTEL BUSINESS"
+    },
+    {
+      "value": "NACIONAL INN ARAXA"
+    },
+    {
+      "value": "DAN INN BARRETOS"
+    },
+    {
+      "value": "BRISTOL UMARIZAL BELEM"
+    },
+    {
+      "value": "GRAND MERCURE BELEM DO PARA"
+    },
+    {
+      "value": "HOLIDAY INN EXPRESS BELEM - ANANINDEUA"
+    },
+    {
+      "value": "HOTEL PRINCESA LOUÇA"
+    },
+    {
+      "value": "IBIS BELEM AEROPORTO"
+    },
+    {
+      "value": "IBIS BUDGET BELEM"
+    },
+    {
+      "value": "IBIS STYLES BELEM BATISTA CAMPOS"
+    },
+    {
+      "value": "IBIS STYLES BELEM HANGAR"
+    },
+    {
+      "value": "IBIS STYLES BELEM NAZARE"
+    },
+    {
+      "value": "MERCURE BELEM BOULEVARD"
+    },
+    {
+      "value": "RADISSON HOTEL BELEM"
+    },
+    {
+      "value": "BOURBON BELO HORIZONTE SAVASSI HOTEL"
+    },
+    {
+      "value": "ESUITES BELO HORIZONTE MINASCA"
+    },
+    {
+      "value": "ESUITES SAVASSI TOSCANINI"
+    },
+    {
+      "value": "ESUITES VIRGINIA LUXEMBURGO"
+    },
+    {
+      "value": "HILTON GARDEN INN BELO HORIZONTE"
+    },
+    {
+      "value": "HOLIDAY INN BELO HORIZONTE SAVASSI"
+    },
+    {
+      "value": "IBIS BELO HORIZONTE LIBERDADE"
+    },
+    {
+      "value": "INTERCITY BH EXPO"
+    },
+    {
+      "value": "MERCURE BELO HORIZONTE LOURDES"
+    },
+    {
+      "value": "NACIONAL INN BELO HORIZONTE"
+    },
+    {
+      "value": "QUALITY HOTEL PAMPULHA"
+    },
+    {
+      "value": "TRANSAMERICA BELO HORIZONTE LOURDES"
+    },
+    {
+      "value": "GO INN BETIM"
+    },
+    {
+      "value": "IBIS BETIM"
+    },
+    {
+      "value": "SLAVIERO BLUMENAU"
+    },
+    {
+      "value": "ATHOS BULCAO HPLUS EXECUTIVE"
+    },
+    {
+      "value": "B HOTEL BRASILIA"
+    },
+    {
+      "value": "BRASIL 21 CONVENTION AFFILIATED BY MELIA"
+    },
+    {
+      "value": "BRASIL 21 SUITES AFFILIATED BY MELIA"
+    },
+    {
+      "value": "BRASILIA PALACE"
+    },
+    {
+      "value": "COMFORT INN TAGUATINGA"
+    },
+    {
+      "value": "COMFORT SUITES BRASILIA"
+    },
+    {
+      "value": "FUSION HPLUS EXPRESS"
+    },
+    {
+      "value": "GO INN TAGUATINGA"
+    },
+    {
+      "value": "GOLDEN TULIP BRASILIA ALVORADA"
+    },
+    {
+      "value": "GRAND MERCURE BRASILIA EIXO MONUMENTAL"
+    },
+    {
+      "value": "KUBITSCHECK PLAZA"
+    },
+    {
+      "value": "MANHATTAN PLAZA"
+    },
+    {
+      "value": "MELIA BRASIL 21"
+    },
+    {
+      "value": "MERCURE BRASILIA LIDER"
+    },
+    {
+      "value": "QUALITY HOTEL E SUITES BRASILIA"
+    },
+    {
+      "value": "ROYAL TULIP BRASILIA ALVORADA"
+    },
+    {
+      "value": "SAINT MORITZ HPLUS EXPRESS"
+    },
+    {
+      "value": "SAINT PAUL PK. HOTEL"
+    },
+    {
+      "value": "WINDSOR BRASILIA HOTEL"
+    },
+    {
+      "value": "WINDSOR PLAZA BRASILIA"
+    },
+    {
+      "value": "HOTEL ESTACAO 101 BRUSQUE"
+    },
+    {
+      "value": "INTERCITY SUAPE HOTEL"
+    },
+    {
+      "value": "HOTEL PARADISO CORPORATE"
+    },
+    {
+      "value": "HOTEL PREMIUM RECANTO DA PASSAGEM"
+    },
+    {
+      "value": "POUSADA DOM FERNANDES"
+    },
+    {
+      "value": "SAMBA CABO FRIO"
+    },
+    {
+      "value": "BOURBON CAMBARA HOTEL"
+    },
+    {
+      "value": "CASSINO TOWER CAMPINAS"
+    },
+    {
+      "value": "DAN INN ANHANGUERA"
+    },
+    {
+      "value": "DAN INN CAMPINAS CAMBUI"
+    },
+    {
+      "value": "EURO SUITE CAMPINAS"
+    },
+    {
+      "value": "GOLDEN PARK CAMBUI"
+    },
+    {
+      "value": "GOLDEN PARK VIRACOPOS"
+    },
+    {
+      "value": "HOTEL PREMIUM CAMPINAS"
+    },
+    {
+      "value": "IBIS BUDGET CAMPINAS AQUIDABAN"
+    },
+    {
+      "value": "IBIS CAMPINAS"
+    },
+    {
+      "value": "IBIS STYLES CAMPINAS ALPHAVILLE"
+    },
+    {
+      "value": "MELIA CAMPINAS"
+    },
+    {
+      "value": "MERCURE CAMPINAS"
+    },
+    {
+      "value": "MONREALE PLUS MIDTOWN CAMPINAS"
+    },
+    {
+      "value": "NACIONAL INN CAMBUI RESIDENCE"
+    },
+    {
+      "value": "NACIONAL INN CAMPINAS"
+    },
+    {
+      "value": "RADISSON RED CAMPINAS"
+    },
+    {
+      "value": "RIO HOTEL BY BOURBON CAMPINAS"
+    },
+    {
+      "value": "SONOHOTEL GLICERIO CAMPINAS BY MONREALE"
+    },
+    {
+      "value": "BRISTOL EXCELER PLAZA"
+    },
+    {
+      "value": "NOVOTEL CAMPO GRANDE"
+    },
+    {
+      "value": "CARANDA HPLUS EXPRESS"
+    },
+    {
+      "value": "COMFORT HOTEL CAMPOS DOS GOYTACAZES"
+    },
+    {
+      "value": "HOTEL POUSADA CRAVO E CANELA"
+    },
+    {
+      "value": "POUSADA DAS GARÇAS"
+    },
+    {
+      "value": "RAMADA HOTEL E SUITES CAMPOS PELINCA"
+    },
+    {
+      "value": "TRANSAMERICA EXECUTIVE CAMPOS"
+    },
+    {
+      "value": "TULIP INN CAMPOS DOS GOYTACAZES"
+    },
+    {
+      "value": "IBIS CANOAS SHOPPING"
+    },
+    {
+      "value": "INTERCITY CANOAS"
+    },
+    {
+      "value": "AREIA BRANCA"
+    },
+    {
+      "value": "JANGADA FLAT SERVICE"
+    },
+    {
+      "value": "POUSADA PARADISE"
+    },
+    {
+      "value": "HOTEL STAR NEW"
+    },
+    {
+      "value": "BOURBON CASCAVEL HOTEL"
+    },
+    {
+      "value": "AGATA HOTEL"
+    },
+    {
+      "value": "POUSADA RESPLANDECER"
+    },
+    {
+      "value": "INTERCITY CAXIAS DO SUL"
+    },
+    {
+      "value": "INTERCITY CUIABA"
+    },
+    {
+      "value": "NACIONAL INN CUIABA"
+    },
+    {
+      "value": "BOURBON CURITIBA HOTEL & SUITES"
+    },
+    {
+      "value": "BRISTOL BRASIL 500"
+    },
+    {
+      "value": "BRISTOL CENTRO CIVICO CURITIBA"
+    },
+    {
+      "value": "BRISTOL METROPOLITAN CURITIBA"
+    },
+    {
+      "value": "BRISTOL PORTAL DO IGUACU"
+    },
+    {
+      "value": "BRISTOL UPPER CURITIBA"
+    },
+    {
+      "value": "CASSINO TOWER CURITIBA AEROPORTO"
+    },
+    {
+      "value": "DAN INN CURITIBA"
+    },
+    {
+      "value": "EURO SUITE CURITIBA BATEL"
+    },
+    {
+      "value": "FULL JAZZ BY SLAVIERO"
+    },
+    {
+      "value": "GOLDEN PARK CURITIBA"
+    },
+    {
+      "value": "GRAND MERCURE RAYON CURITIBA"
+    },
+    {
+      "value": "IBIS CURITIBA BATEL"
+    },
+    {
+      "value": "IBIS CURITIBA SHOPPING"
+    },
+    {
+      "value": "IBIS STYLES CURITIBA AEROPORTO "
+    },
+    {
+      "value": "INTERCITY CURITIBA BATEL"
+    },
+    {
+      "value": "MERCURE CURITIBA BATEL"
+    },
+    {
+      "value": "MERCURE CURITIBA GOLDEN"
+    },
+    {
+      "value": "MERCURE CURITIBA SETE DE SETEMBRO"
+    },
+    {
+      "value": "NACIONAL INN CURITIBA ESTACAO "
+    },
+    {
+      "value": "NACIONAL INN SANTA FELICIDADE"
+    },
+    {
+      "value": "NACIONAL INN TORRES"
+    },
+    {
+      "value": "NOVOTEL CURITIBA BATEL"
+    },
+    {
+      "value": "PESTANA CURITIBA HOTEL"
+    },
+    {
+      "value": "RIO HOTEL BY BOURBON CURITIBA BATEL"
+    },
+    {
+      "value": "ROCKEFELLER BY SLAVIERO HOTEIS"
+    },
+    {
+      "value": "SLAVIERO CURITIBA BATEL"
+    },
+    {
+      "value": "SLAVIERO CURITIBA CENTRO"
+    },
+    {
+      "value": "SLIM CURITIBA ALTO DA XV"
+    },
+    {
+      "value": "SLIM CURITIBA AV DAS TORRES"
+    },
+    {
+      "value": "SLIM CURITIBA JOAO BETTEGA"
+    },
+    {
+      "value": "VICTORIA VILLA CURITIBA"
+    },
+    {
+      "value": "BRISTOL ALINE"
+    },
+    {
+      "value": "FAIAL PRIME SUITES"
+    },
+    {
+      "value": "INTERCITY FLORIANOPOLIS"
+    },
+    {
+      "value": "MERCURE FLORIANOPOLIS CONVENTION"
+    },
+    {
+      "value": "NOVOTEL FLORIANOPOLIS"
+    },
+    {
+      "value": "SLAVIERO BAIA NORTE"
+    },
+    {
+      "value": "BLUE TREE TOWERS FORTALEZA"
+    },
+    {
+      "value": "BOURBON FORTALEZA HOTEL"
+    },
+    {
+      "value": "BRISTOL GUARARAPES FORTALEZA"
+    },
+    {
+      "value": "BRISTOL JANGADA FORTALEZA"
+    },
+    {
+      "value": "COMFORT HOTEL FORTALEZA"
+    },
+    {
+      "value": "GRAN MARQUISE HOTEL"
+    },
+    {
+      "value": "HOLIDAY INN FORTALEZA"
+    },
+    {
+      "value": "IBIS FORTALEZA PRAIA DE IRACEMA"
+    },
+    {
+      "value": "LUZEIROS FORTALEZA"
+    },
+    {
+      "value": "MERCURE FORTALEZA MEIRELES"
+    },
+    {
+      "value": "TULIP INN FORTALEZA"
+    },
+    {
+      "value": "VILA GALE FORTALEZA"
+    },
+    {
+      "value": "VILA PARK HOTEL FORTALEZA"
+    },
+    {
+      "value": "WA HOTEL FORTALEZA"
+    },
+    {
+      "value": "HOTEL KICHARME"
+    },
+    {
+      "value": "PAUSA HOTEL PONTAL DE MACEIO"
+    },
+    {
+      "value": "JL HOTEL BY BOURBON (FOZ DO IGUACU)"
+    },
+    {
+      "value": "WYNDHAM FOZ DO IGUACU"
+    },
+    {
+      "value": "BRISTOL EVIDENCE HOTEL"
+    },
+    {
+      "value": "COMFORT SUITES FLAMBOYANT"
+    },
+    {
+      "value": "GOLDEN TULIP GOIANIA ADDRESS"
+    },
+    {
+      "value": "SAN MARINO SUITE HOTEL"
+    },
+    {
+      "value": "HOLIDAY INN GOIANIA"
+    },
+    {
+      "value": "SAN DIEGO GOVERNADOR VALADARES"
+    },
+    {
+      "value": "POUSADA O PESCADOR"
+    },
+    {
+      "value": "HOTEL PORTO SOL"
+    },
+    {
+      "value": "POUSADA ENSEADA VERDE"
+    },
+    {
+      "value": "BRISTOL INTERNACIONAL GUARULHOS"
+    },
+    {
+      "value": "COMFORT HOTEL GUARULHOS AEROPORTO"
+    },
+    {
+      "value": "IBIS GUARULHOS AEROPORTO"
+    },
+    {
+      "value": "MERCURE GUARULHOS AEROPORTO"
+    },
+    {
+      "value": "MONREALE PLUS SAO PAULO GUARULHOS"
+    },
+    {
+      "value": "SAO PAULO AIRPORT MARRIOT HOTEL"
+    },
+    {
+      "value": "SLAVIERO GUARULHOS AEROPORTO"
+    },
+    {
+      "value": "BRISTOL IMPERATRIZ MARANHAO"
+    },
+    {
+      "value": "RIO HOTEL BY BOURBON INDAIATUBA"
+    },
+    {
+      "value": "SAMBA ITABORAI"
+    },
+    {
+      "value": "PALMIER HOTEL"
+    },
+    {
+      "value": "TULIP INN ITAGUAI"
+    },
+    {
+      "value": "HOTEL ESTACAO 101"
+    },
+    {
+      "value": "INTERCITY ITUPEVA"
+    },
+    {
+      "value": "DAN INN RECIFE MAR"
+    },
+    {
+      "value": "IBIS JOAO PESSOA"
+    },
+    {
+      "value": "QUALITY SUITES JOAO PESSOA"
+    },
+    {
+      "value": "ALVEN HOTEL BY SLAVIERO HOTEIS"
+    },
+    {
+      "value": "BOURBON JOINVILLE CONVENTION HOTEL"
+    },
+    {
+      "value": "BRISTOL SABRINA HOTEL DE CHARME"
+    },
+    {
+      "value": "IBIS JUIZ DE FORA"
+    },
+    {
+      "value": "MERCURE JUNDIA SHOPPING (ANTIGO ADAGIO)"
+    },
+    {
+      "value": "NACIONAL INN LIMEIRA"
+    },
+    {
+      "value": "DAYS INN LINHARES"
+    },
+    {
+      "value": "SAMBA LINHARES"
+    },
+    {
+      "value": "SAMBA LINHARES"
+    },
+    {
+      "value": "LINHATUR HOTEL"
+    },
+    {
+      "value": "BLUE TREE PREMIUM LONDRINA"
+    },
+    {
+      "value": "BOURBON LONDRINA HOTEL"
+    },
+    {
+      "value": "COMFORT SUITES LONDRINA"
+    },
+    {
+      "value": "SLAVIERO LONDRINA"
+    },
+    {
+      "value": "ATLANTICO MACAE BY INN HOUSE"
+    },
+    {
+      "value": "CHAMPS DUMONT"
+    },
+    {
+      "value": "COMFORT SUITES MACAE"
+    },
+    {
+      "value": "DUBAI MACAE BY ATLANTICA"
+    },
+    {
+      "value": "GLORIA GARDEN SUITES"
+    },
+    {
+      "value": "GOLDEN TOWERS MACAE"
+    },
+    {
+      "value": "GOLDEN TULIP MACAE"
+    },
+    {
+      "value": "HOTEL ROYAL ATLANTICA"
+    },
+    {
+      "value": "HYATT PLACE MACAÉ"
+    },
+    {
+      "value": "IBIS MACAE"
+    },
+    {
+      "value": "MERCURE MACAE"
+    },
+    {
+      "value": "PARADISO MACAE HOTEL"
+    },
+    {
+      "value": "RAMADA PLAZA MACAE IMBETIBA"
+    },
+    {
+      "value": "ROYAL MACAE PALACE HOTEL"
+    },
+    {
+      "value": "ROYAL URBAN HOTEL"
+    },
+    {
+      "value": "SOLAR SUITES HOTEL"
+    },
+    {
+      "value": "AMAPA HOTEL"
+    },
+    {
+      "value": "ATALANTA HOTEL"
+    },
+    {
+      "value": "CETA ECOTEL"
+    },
+    {
+      "value": "FROTA PALACE HOTEL"
+    },
+    {
+      "value": "HOTEL DO FORTE"
+    },
+    {
+      "value": "HOTEL FORTE EXPRESS"
+    },
+    {
+      "value": "COMFORT HOTEL MACEIO"
+    },
+    {
+      "value": "IBIS MACEIO PAJUCARA"
+    },
+    {
+      "value": "INTERCITY MACEIO"
+    },
+    {
+      "value": "MERCURE MACEIO PAJUCARA"
+    },
+    {
+      "value": "BLUE TREE PREMIUM MANAUS"
+    },
+    {
+      "value": "COMFORT HOTEL MANAUS"
+    },
+    {
+      "value": "HOLIDAY INN MANAUS"
+    },
+    {
+      "value": "IBIS STYLES MANAUS"
+    },
+    {
+      "value": "INTERCITY MANAUS "
+    },
+    {
+      "value": "MERCURE MANAUS"
+    },
+    {
+      "value": "SLEEP INN MANAUS"
+    },
+    {
+      "value": "TAJ MAHAL"
+    },
+    {
+      "value": "RIO HOTEL BY BOURBON MARINGA"
+    },
+    {
+      "value": "BRISTOL ZANIBONI MOGI MIRIM"
+    },
+    {
+      "value": "INTERCITY MONTES CLAROS"
+    },
+    {
+      "value": "COMFORT HOTEL SUITES NATAL"
+    },
+    {
+      "value": "HOTEL HOLIDAY INN NATAL - LAGOA NOVA"
+    },
+    {
+      "value": "MAJESTIC PONTA NEGRA"
+    },
+    {
+      "value": "QUALITY SUITES NATAL"
+    },
+    {
+      "value": "SERHS NATAL GRAND HOTEL"
+    },
+    {
+      "value": "TERRA BRASILIS HOTEL"
+    },
+    {
+      "value": "VILLA PARK HOTEL"
+    },
+    {
+      "value": "ARITUBA PARK HOTEL"
+    },
+    {
+      "value": "HOTEL ORIZZONTE NITEROI"
+    },
+    {
+      "value": "ICARAI PRAIA HOTEL"
+    },
+    {
+      "value": "MATIZ NITEROI DESIGN HOTEL"
+    },
+    {
+      "value": "HOTEL FLORESTA"
+    },
+    {
+      "value": "TROPICAL HOTEL"
+    },
+    {
+      "value": "HOTEL ARAGUAIA"
+    },
+    {
+      "value": "IBIS PALMAS AVENIDA JK"
+    },
+    {
+      "value": "IBIS STYLES PALMAS"
+    },
+    {
+      "value": "HOTEL POUSADA 360 GRAUS"
+    },
+    {
+      "value": "HOTEL POUSADA SOL & LUA"
+    },
+    {
+      "value": "POUSADA CALIFORNIA TIA LIA"
+    },
+    {
+      "value": "POUSADA VELLEIRO INN"
+    },
+    {
+      "value": "IBIS PARANAGUA"
+    },
+    {
+      "value": "SLEEP INN PAULINIA"
+    },
+    {
+      "value": "INTERCITY PATIO PINDA"
+    },
+    {
+      "value": "NACIONAL INN PIRACICABA"
+    },
+    {
+      "value": "DAN INN POCOS DE CALDAS"
+    },
+    {
+      "value": "HOTEL PLAZA POCOS DE CALDAS"
+    },
+    {
+      "value": "NACIONAL INN POCOS DE CALDAS"
+    },
+    {
+      "value": "HOTEL PENNA"
+    },
+    {
+      "value": "POJUCA PLAZA"
+    },
+    {
+      "value": "BOURBON PONTA GROSSA CONVENTION HOTEL"
+    },
+    {
+      "value": "BLUE TREE TOWERS MILLENIUM"
+    },
+    {
+      "value": "DAN INN EXPRESS PORTO ALEGRE"
+    },
+    {
+      "value": "HILTON PORTO ALEGRE"
+    },
+    {
+      "value": "IBIS BUDGET PORTO ALEGRE"
+    },
+    {
+      "value": "IBIS STYLES PORTO ALEGRE CENTRO"
+    },
+    {
+      "value": "INTERCITY CIDADE BAIXA"
+    },
+    {
+      "value": "INTERCITY PRAIA DE BELAS"
+    },
+    {
+      "value": "LAGHETTO VIVERONE MOINHOS"
+    },
+    {
+      "value": "NACIONAL INN PORTO ALEGRE"
+    },
+    {
+      "value": "NOVOTEL PORTO ALEGRE AIRPORT"
+    },
+    {
+      "value": "NOVOTEL PORTO ALEGRE TRES FIGUEIRAS"
+    },
+    {
+      "value": "QUALITY PORTO ALEGRE"
+    },
+    {
+      "value": "LARISON HOTEIS"
+    },
+    {
+      "value": "SLAVIERO PORTO VELHO"
+    },
+    {
+      "value": "ATLANTE PLAZA"
+    },
+    {
+      "value": "BUGAN RECIFE HOTEL BY ATLANTICA"
+    },
+    {
+      "value": "EURO SUITE BOA VIAGEM"
+    },
+    {
+      "value": "FIT TRANSAMERICA RECIFE"
+    },
+    {
+      "value": "GOLDEN PARK BOA VIAGEM"
+    },
+    {
+      "value": "GRAND MERCURE RECIFE BOA VIAGEM"
+    },
+    {
+      "value": "IBIS RECIFE AEROPORTO"
+    },
+    {
+      "value": "IBIS RECIFE BOA VIAGEM"
+    },
+    {
+      "value": "LUZEIROS RECIFE"
+    },
+    {
+      "value": "MAR HOTEL CONVENTIONS"
+    },
+    {
+      "value": "MARANTE PLAZA HOTEL"
+    },
+    {
+      "value": "MERCURE  NAVEGANTES RECIFE"
+    },
+    {
+      "value": "NACIONAL INN RECIFE"
+    },
+    {
+      "value": "RADISSON RECIFE"
+    },
+    {
+      "value": "TRANSAMERICA PRESTIGE BEACH CLASS"
+    },
+    {
+      "value": "VILLA D'ORO HOTEL"
+    },
+    {
+      "value": "GOLDEN PARK RIBEIRAO PRETO"
+    },
+    {
+      "value": "INTERCITY RIBEIRAO PRETO"
+    },
+    {
+      "value": "MONREALE EXPRESS RIBEIRAO PRETO"
+    },
+    {
+      "value": "NACIONAL INN RIBEIRAO PRETO"
+    },
+    {
+      "value": "ROYAL TULIP JP RIBEIRAO PRETO"
+    },
+    {
+      "value": "TRYP BY WYNDHAM RIBEIRAO PRETO"
+    },
+    {
+      "value": "VILAGE INN RIBEIRAO PRETO"
+    },
+    {
+      "value": "BRISTOL EASY HOTEL - RIO BONITO"
+    },
+    {
+      "value": "BRISTOL INFINITY RIO CLARO"
+    },
+    {
+      "value": "AMERICAS BARRA HOTEL"
+    },
+    {
+      "value": "AMERICAS TOWNHOUSE"
+    },
+    {
+      "value": "AMERIS RITZ COPACABANA HOTEL"
+    },
+    {
+      "value": "ARENA COPACABANA HOTEL"
+    },
+    {
+      "value": "ARENA LEME"
+    },
+    {
+      "value": "AROSA RIO HOTEL"
+    },
+    {
+      "value": "BOURBON BARRA DA TIJUCA RESIDENCE"
+    },
+    {
+      "value": "COURTYARD BY MARRIOTT BARRA DA TIJUCA"
+    },
+    {
+      "value": "ELEGANCE PRAIA HOTEL"
+    },
+    {
+      "value": "ESUITES RECREIO SHOPPING"
+    },
+    {
+      "value": "FAIRMONTE COPACABANA"
+    },
+    {
+      "value": "FLUMINENSE HOTEL"
+    },
+    {
+      "value": "GOLDEN PARK RIO DE JANEIRO AEROPORTO"
+    },
+    {
+      "value": "GRAND HYATT RIO DE JANEIRO"
+    },
+    {
+      "value": "GRAND MERCURE RJ COPACABANA"
+    },
+    {
+      "value": "HILTON BARRA RIO DE JANEIRO"
+    },
+    {
+      "value": "HOTEL LAGHETTO STILO BARRA RIO"
+    },
+    {
+      "value": "HOTEL OK"
+    },
+    {
+      "value": "HOTEL REGINA"
+    },
+    {
+      "value": "SAMBA BOSSA NOVA IPANEMA"
+    },
+    {
+      "value": "SAMBA BOSSA NOVA IPANEMA"
+    },
+    {
+      "value": "IBIS BARRA DA TIJUCA"
+    },
+    {
+      "value": "IBIS COPACABANA POSTO 2"
+    },
+    {
+      "value": "IBIS COPACABANA POSTO 5"
+    },
+    {
+      "value": "IBIS RIO DE JANEIRO BOTAFOGO"
+    },
+    {
+      "value": "IBIS RIO DE JANEIRO CENTRO"
+    },
+    {
+      "value": "IBIS RIO DE JANEIRO NOVA AMERICA"
+    },
+    {
+      "value": "IBIS RIO DE JANEIRO PARQUE OLIMPICO"
+    },
+    {
+      "value": "IBIS RIO DE JANEIRO SANTOS DUMONT"
+    },
+    {
+      "value": "IBIS RIO PORTO ATLANTICO"
+    },
+    {
+      "value": "IBIS STYLES RIO DE JANEIRO BOTAFOGO"
+    },
+    {
+      "value": "LAGUNE BARRA HOTEL"
+    },
+    {
+      "value": "MAJESTIC PALACE"
+    },
+    {
+      "value": "MAR PALACE COPACABANA"
+    },
+    {
+      "value": "MERCURE RIO BOUTIQUE COPACABANA"
+    },
+    {
+      "value": "MERCURE RJ BARRA DA TIJUCA"
+    },
+    {
+      "value": "MIRADOR RIO COPACABANA HOTEL"
+    },
+    {
+      "value": "MIRAMAR HOTEL BY WINDSOR"
+    },
+    {
+      "value": "MIRASOL COPACABANA"
+    },
+    {
+      "value": "NACIONAL INN RIO COPACABANA"
+    },
+    {
+      "value": "NOVOTEL RIO DE JANEIRO BARRA DA TIJUCA"
+    },
+    {
+      "value": "NOVOTEL RIO DE JANEIRO LEME"
+    },
+    {
+      "value": "NOVOTEL RIO DE JANEIRO PARQUE OLIMPICO"
+    },
+    {
+      "value": "NOVOTEL RIO DE JANEIRO PORTO ATLANTICO"
+    },
+    {
+      "value": "NOVOTEL RIO DE JANEIRO SANTOS DUMONT"
+    },
+    {
+      "value": "NOVOTEL RJ PRAIA DE BOTAFOGO"
+    },
+    {
+      "value": "PALMIER HOTEL"
+    },
+    {
+      "value": "PESTANA RIO ATLANTICA"
+    },
+    {
+      "value": "PETIT RIO HOTEL"
+    },
+    {
+      "value": "QUALITY RIO DE JANEIRO BARRA DA TIJUCA"
+    },
+    {
+      "value": "RADISSON RIO DE JANEIRO BARRA"
+    },
+    {
+      "value": "REAL PALACE"
+    },
+    {
+      "value": "REGENCY PARK HOTEL"
+    },
+    {
+      "value": "RIO OTHON PALACE"
+    },
+    {
+      "value": "ROYAL REGENCY PALACE HOTEL"
+    },
+    {
+      "value": "ROYAL RIO PALACE"
+    },
+    {
+      "value": "SAMBA RIO 1900"
+    },
+    {
+      "value": "SAVOY OTHON"
+    },
+    {
+      "value": "SCORIAL RIO HOTEL"
+    },
+    {
+      "value": "SHERATON GRAND RIO HOTEL & RESORT"
+    },
+    {
+      "value": "VENIT BARRA HOTEL"
+    },
+    {
+      "value": "VILA GALE RIO DE JANEIRO"
+    },
+    {
+      "value": "WINDSOR ASTURIAS"
+    },
+    {
+      "value": "WINDSOR CALIFORNIA COPACABANA"
+    },
+    {
+      "value": "WINDSOR EXCELSIOR"
+    },
+    {
+      "value": "WINDSOR FLORIDA"
+    },
+    {
+      "value": "WINDSOR GUANABARA"
+    },
+    {
+      "value": "WINDSOR LEME HOTEL"
+    },
+    {
+      "value": "WINDSOR MARTINIQUE"
+    },
+    {
+      "value": "WINDSOR PLAZA"
+    },
+    {
+      "value": "WINDSOR TOWER HOTEL"
+    },
+    {
+      "value": "HOTEL LAGHETTO VILLA MOURA"
+    },
+    {
+      "value": "HOTEL LAGHETTO VIVERONE RIO GRANDE"
+    },
+    {
+      "value": "FIT TRANSAMERICA RONDONOPOLIS"
+    },
+    {
+      "value": "AMERICA TOWERS"
+    },
+    {
+      "value": "DAN INN EXPRESS SALVADOR"
+    },
+    {
+      "value": "FIESTA BAHIA HOTEL"
+    },
+    {
+      "value": "GOLDEN PARK SALVADOR"
+    },
+    {
+      "value": "IBIS SALVADOR RIO VERMELHO"
+    },
+    {
+      "value": "INTERCITY SALVADOR AEROPORTO"
+    },
+    {
+      "value": "MERCURE PITUBA"
+    },
+    {
+      "value": "MERCURE SALVADOR BOULEVARD"
+    },
+    {
+      "value": "NOVOTEL SALVADOR RIO VERMELHO"
+    },
+    {
+      "value": "QUALITY HOTEL E SUITES SAO SALVADOR"
+    },
+    {
+      "value": "SAMBA VILLA DA PRAIA HOTEL"
+    },
+    {
+      "value": "VILA GALE SALVADOR"
+    },
+    {
+      "value": "BRISTOL SANTO ANDRE"
+    },
+    {
+      "value": "HILTON GARDEN INN SANTO ANDRE"
+    },
+    {
+      "value": "IBIS SANTO ANDRE"
+    },
+    {
+      "value": "BOURBON SANTOS CONVENTION HOTEL"
+    },
+    {
+      "value": "COMFORT HOTEL SANTOS"
+    },
+    {
+      "value": "COSMOPOLITAN PRAIA FLAT"
+    },
+    {
+      "value": "IBIS BUDGET SANTOS GONZAGA"
+    },
+    {
+      "value": "IBIS SANTOS GONZAGA PRAIA"
+    },
+    {
+      "value": "IBIS SANTOS VALONGO"
+    },
+    {
+      "value": "NOVOTEL SANTOS GONZAGA"
+    },
+    {
+      "value": "SHERATON SANTOS HOTEL"
+    },
+    {
+      "value": "COMFORT HOTEL SAO CAETANO"
+    },
+    {
+      "value": "MERCURE SAO CAETANO DO SUL"
+    },
+    {
+      "value": "CASSINO TOWER SAO JOSE DO RIO PRETO"
+    },
+    {
+      "value": "DAN INN SAO JOSE DO RIO PRETO"
+    },
+    {
+      "value": "HOTEL CITY HALL LOFT"
+    },
+    {
+      "value": "IBIS SAO JOSE DOS CAMPOS COLINAS"
+    },
+    {
+      "value": "MONREALE SAO JOSE DOS CAMPOS"
+    },
+    {
+      "value": "NOVOTEL SAO JOSE DOS CAMPOS"
+    },
+    {
+      "value": "CASSINO TOWER CURITIBA AEROPORTO"
+    },
+    {
+      "value": "SLAVIERO CURITIBA AEROPORTO"
+    },
+    {
+      "value": "INTERCITY SAO LEOPOLDO"
+    },
+    {
+      "value": "BLUE TREE TOWERS SAO LUIS HOTEL"
+    },
+    {
+      "value": "IBIS SAO LUIS"
+    },
+    {
+      "value": "LUZEIROS SAO LUIS"
+    },
+    {
+      "value": "GO INN SAO MATEUS"
+    },
+    {
+      "value": "IBIS STYLES SAO MATEUS"
+    },
+    {
+      "value": "NORTE PALACE HOTEL"
+    },
+    {
+      "value": "BLUE TREE TOWERS ANALIA FRANCO"
+    },
+    {
+      "value": "BRISTOL THE TIME BERRINI"
+    },
+    {
+      "value": "DELPLAZA MARABA SAO PAULO"
+    },
+    {
+      "value": "EXCELSIOR SAO PAULO BY DELPLAZA"
+    },
+    {
+      "value": "EZ ACLIMACAO HOTEL"
+    },
+    {
+      "value": "EZ MOEMA HOTEL"
+    },
+    {
+      "value": "GRAND HYATT SAO PAULO"
+    },
+    {
+      "value": "GRAND MERCURE SAO PAULO IBIRAPUERA"
+    },
+    {
+      "value": "GRAND MERCURE SP ITAIM BIBI"
+    },
+    {
+      "value": "HILTON SAO PAULO MORUMBI"
+    },
+    {
+      "value": "HOLIDAY INN PARQUE ANHEMBI"
+    },
+    {
+      "value": "HOTEL INTERCITY IBIRAPUERA"
+    },
+    {
+      "value": "HOTEL TIMBIRAS SAO PAULO - BY DELPLAZA"
+    },
+    {
+      "value": "IBIS STYLES SÃO PAULO ANHEMBI  "
+    },
+    {
+      "value": "INNSIDE SAO PAULO ITAIM"
+    },
+    {
+      "value": "INTERCITY ADDRESS FARIA LIMA"
+    },
+    {
+      "value": "INTERCITY ANHEMBI"
+    },
+    {
+      "value": "INTERCITY BERRINI"
+    },
+    {
+      "value": "INTERCITY INTERATIVE JARDINS"
+    },
+    {
+      "value": "INTERCITY PAULISTA"
+    },
+    {
+      "value": "INTERCITY PREMIUM NACOES UNIDAS"
+    },
+    {
+      "value": "INTERCONTINENTAL SAO PAULO"
+    },
+    {
+      "value": "LAGHETTO STILO SAO PAULO"
+    },
+    {
+      "value": "MELIA IBIRAPUERA"
+    },
+    {
+      "value": "MELIA JARDIM EUROPA"
+    },
+    {
+      "value": "MELIA PAULISTA"
+    },
+    {
+      "value": "MERCURE SAO PAULO PAULISTA"
+    },
+    {
+      "value": "MONREALE LIFESTYLE HIGIENOPOLIS "
+    },
+    {
+      "value": "PESTANA SAO PAULO"
+    },
+    {
+      "value": "PULLMAN SAO PAULO VILA OLIMPIA"
+    },
+    {
+      "value": "QUALITY PAULISTA-SAO PAULO JARDINS"
+    },
+    {
+      "value": "RIO HOTEL BY BOURBON SP BARRA FUNDA"
+    },
+    {
+      "value": "SAO PAULO HIGIENOPOLIS AFFILIATED MELIA"
+    },
+    {
+      "value": "SAO PAULO NACOES UNIDAS AFFILIATED MELIA"
+    },
+    {
+      "value": "SAO PAULO TATUAPE AFFILIATED BY MELIA"
+    },
+    {
+      "value": "SLAVIERO DOWNTOWN SAO PAULO"
+    },
+    {
+      "value": "SLAVIERO SAO PAULO IBIRAPUERA"
+    },
+    {
+      "value": "SLAVIERO SAO PAULO MOEMA"
+    },
+    {
+      "value": "SLIM SAO PAULO CONGONHAS"
+    },
+    {
+      "value": "STAYBRIDGE SUITES SAO PAULO"
+    },
+    {
+      "value": "THE UNIVERSE PAULISTA BY INTERCITY"
+    },
+    {
+      "value": "TRANSAMERICA BERRINI"
+    },
+    {
+      "value": "TRANSAMERICA EXECUTIVE NOVA PAULISTA"
+    },
+    {
+      "value": "TRANSAMERICA PRIME INTERNACIONAL PLAZA"
+    },
+    {
+      "value": "VILA GALE PAULISTA"
+    },
+    {
+      "value": "WYNDHAM SAO PAULO BERRINI"
+    },
+    {
+      "value": "WYNDHAM SAO PAULO PAULISTA"
+    },
+    {
+      "value": "ABRICO BEACH HOTEL"
+    },
+    {
+      "value": "HOTEL GUARDA MOR"
+    },
+    {
+      "value": "GO INN SERRA"
+    },
+    {
+      "value": "TULIP INN SETE LAGOAS"
+    },
+    {
+      "value": "SAN DIEGO VEREDAS SETE LAGOAS"
+    },
+    {
+      "value": "DAN INN SOROCABA"
+    },
+    {
+      "value": "GOLDEN PARK SOROCABA"
+    },
+    {
+      "value": "IBIS BUDGET SOROCABA"
+    },
+    {
+      "value": "NACIONAL INN SOROCABA"
+    },
+    {
+      "value": "NOVOTEL SOROCABA"
+    },
+    {
+      "value": "TULIP INN SOROCABA"
+    },
+    {
+      "value": "IBIS TAUBATE"
+    },
+    {
+      "value": "LUXOR SOFT HOTEL"
+    },
+    {
+      "value": "HOTEL OT"
+    },
+    {
+      "value": "SAMBA TRES LAGOAS"
+    },
+    {
+      "value": "TAJ HOTEL"
+    },
+    {
+      "value": "TOKYO  HOTEL"
+    },
+    {
+      "value": "SAMBA TRES RIOS"
+    },
+    {
+      "value": "SAMBA TRES RIOS"
+    },
+    {
+      "value": "DAN INN UBERABA"
+    },
+    {
+      "value": "GOLDEN PARK UBERABA"
+    },
+    {
+      "value": "DAN INN UBERLANDIA"
+    },
+    {
+      "value": "SLIM CUIABA AEROPORTO"
+    },
+    {
+      "value": "TULIP INN VILA VELHA (BRISTOL ITAPARICA)"
+    },
+    {
+      "value": "INTERCITY VINHEDO"
+    },
+    {
+      "value": "ALAMEDA VITORIA HOTEL"
+    },
+    {
+      "value": "GO INN VITORIA"
+    },
+    {
+      "value": "GOLDEN TULIP PORTO VITORIA"
+    },
+    {
+      "value": "IBIS BUDGET VITORIA"
+    },
+    {
+      "value": "IBIS VITORIA AEROPORTO"
+    },
+    {
+      "value": "IBIS VITORIA PRAIA DE CAMBURI"
+    },
+    {
+      "value": "IBIS VITORIA PRAIA DO CANTO"
+    },
+    {
+      "value": "TRANSAMERICA FIT RETA DA PENHA"
+    },
+    {
+      "value": "TRANSAMERICA FIT VITORIA PRAIA CAMBURI"
+    },
+    {
+      "value": "TRIANGULO APART HOTEL"
+    },
+    {
+      "value": "VITORIA PRAIA HOTEL"
+    }
+  ]
+}
