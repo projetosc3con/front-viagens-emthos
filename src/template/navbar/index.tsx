@@ -99,9 +99,42 @@ const NavbarTop = () => {
                             <NavLink className='nav-link' to='/notificacoes' ativo={location.pathname.includes('/notificacoes')}>
                                 Notificações
                             </NavLink>
+                            <NavLink className='nav-link' to='/contratos' ativo={location.pathname.includes('/contratos')}>
+                                Contratos
+                            </NavLink>
+                            <NavLink className='nav-link' to='/gerencias' ativo={location.pathname.includes('/gerencias')}>
+                                Gerências
+                            </NavLink>
                             <NavLink className='nav-link' to='/configuracoes' ativo={location.pathname.includes('/configuracoes')}>
                                 Configurações
                             </NavLink>
+                        </div>}
+                        {user?.nivelAcesso === 'PRP' && 
+                        <div className='d-flex flex-column flex-lg-row'>
+                            <NavLink className='nav-link' to='/' ativo={location.pathname === '/'}>
+                                Home
+                            </NavLink>
+                            <NavLink className='nav-link' to='/consultar' ativo={location.pathname === '/consultar' || location.pathname.includes('/viagens')}>
+                                Consultar
+                            </NavLink>
+                            <NavLink className='nav-link' to='/nova' ativo={location.pathname.includes('/nova')}>
+                                Nova
+                            </NavLink>
+                            <NavLink className='nav-link' to='/usuarios' ativo={location.pathname.includes('/usuarios')}>
+                                Usuarios
+                            </NavLink>
+                            <NavLink className='nav-link' to='/gerencias' ativo={location.pathname.includes('/gerencias')}>
+                                Gerências
+                            </NavLink>
+                            <NavLink className='nav-link' to='/relatorios' ativo={location.pathname.includes('/relatorios')}>
+                                Relatorios
+                            </NavLink>
+                            {/* <NavLink className='nav-link' to='/notificacoes' ativo={location.pathname.includes('/notificacoes')}>
+                                Notificações
+                            </NavLink>
+                            <NavLink className='nav-link' to='/configuracoes' ativo={location.pathname.includes('/configuracoes')}>
+                                Configurações
+                            </NavLink> */}
                         </div>}
                         <NavDropdown title={user?.nomeAbreviado}>
                             <NavDropdown.Item onClick={() => setShowModal(true)}>

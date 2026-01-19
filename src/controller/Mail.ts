@@ -6,10 +6,19 @@ import { getGerencia } from "./Gerencia";
 import { getUser, getUsers } from "./Usuario";
 import { format, parse, subDays } from "date-fns";
 import Triagem from "../types/Triagem";
-import { getAgente, getAgentes } from "../types/Agente";
 import PrestacaoContas from "../types/PrestacaoContas";
 import Usuario from "../types/Usuario";
-import { getAdiantamento } from "./Adiantamento";
+import api from "../api";
+import Contrato from "../types/Contrato";
+
+export const getContrato = async (numero: string): Promise<Contrato | null> => {
+    try {
+        const { data } = await api.get<Contrato>('/contratos/' + numero);
+        return data;
+    } catch (error: any) {
+        return null;
+    }
+}
 
 export const SendEmail = async (email: Mail): Promise<{ res: boolean, msg: string }> => {
     try {
@@ -45,14 +54,11 @@ export const getEmails = async (): Promise<MailTable[]> => {
 
 export const NotificarPreAprovada = async (viagem: Viagem) => {
     try {
-        const gerViagem = await getGerencia(viagem.gerencia);
-        const agts = await getAgentes();
-        const aEmthos = agts.find((a) => a.funcao === "emthos");
-        const preposto = agts.find((a) => a.funcao === "preposto");
-        if (!gerViagem || !aEmthos || !preposto) return;
+        const contrato = await getContrato(viagem.contrato);
+        if (!contrato) return;
         const col = await getUser(viagem.colaborador);
         let mail: Mail = {
-            to: [viagem.colaborador, aEmthos.email, preposto.email],
+            to: [viagem.colaborador, contrato.agentes.interno.email, contrato.agentes.preposto.email],
             idViagem: viagem.id.toString(),
             acaoViagem: 'Cadastro',
             statusViagem: viagem.status,
@@ -297,13 +303,13 @@ export const NotificarSolicitacao = async (viagem: Viagem) => {
                             </div>
                             <div class="button-group">
                                 <a
-                                    href="https://handletravelrequest-kai7jslaxq-rj.a.run.app?docId=${viagem.id}&action=approve"
+                                    href="https://api-viagens-emthos.vercel.app/emails/handleraprovacao?docId=${viagem.id}&action=approve"
                                     class="btn-confirm"
                                 >
                                     Aprovar
                                 </a>
                                 <a
-                                    href="https://handletravelrequest-kai7jslaxq-rj.a.run.app?docId=${viagem.id}&action=reject"
+                                    href="https://api-viagens-emthos.vercel.app/emails/handleraprovacao?docId=${viagem.id}&action=reject"
                                     class="btn-reprove"
                                 >
                                     Reprovar
@@ -424,14 +430,14 @@ export const NotificarProgramacao = async (viagem: Viagem, orcamento?: Triagem) 
         }
         await addDoc(mailCol, mail);
         if (orcamento) {
-            const agentePb = await getAgente('petrobras');
-            if(!agentePb) return;
+            const contrato = await getContrato(viagem.contrato)
+            if(!contrato) return;
             let docEmail: Mail = {
-                to: [agentePb.email],
+                to: [contrato.agentes.cliente.email],
                 idViagem: viagem.id.toString(),
                 acaoViagem: 'Programação',
                 statusViagem: viagem.status,
-                agenteViagem: agentePb.email,
+                agenteViagem: contrato.agentes.cliente.email,
                 message: {
                     subject: `Viagem ID ${viagem.id} para ${viagem.destino} Programada`,
                     text: '',
@@ -505,7 +511,7 @@ export const NotificarProgramacao = async (viagem: Viagem, orcamento?: Triagem) 
                         <body>
                             <div class="background-overlay"></div>
                             <div class="container">
-                                <h2 style="margin-top:0;">Olá ${agentePb.nome},</h2>
+                                <h2 style="margin-top:0;">Olá ${contrato.agentes.cliente.nome},</h2>
                                 <p>Viagem de ${viagem.dataIda} a ${viagem.dataVolta} programada. Valor final de R$ ${orcamento.valorProgramado}</p>
                                 <div class="button-group">
                                     <a
@@ -540,14 +546,14 @@ export const NotificarProgramacao = async (viagem: Viagem, orcamento?: Triagem) 
 
 export const NotificaPrepSolicitacao = async (viagem: Viagem, col: Usuario) => {
     try {
-        const preposto = await getAgente('preposto');
-        if (!preposto) return;
+        const contrato = await getContrato(viagem.contrato);
+        if (!contrato) return;
         let mail: Mail = {
-            to: [preposto.email],
+            to: [contrato.agentes.preposto.email],
             idViagem: viagem.id.toString(),
             acaoViagem: 'Notif. Preposto',
             statusViagem: viagem.status,
-            agenteViagem: preposto.nome,
+            agenteViagem: contrato.agentes.preposto.nome,
             message: {
                 subject: `Viagem ID ${viagem.id} - ${viagem.status}`,
                 text: '',
@@ -594,7 +600,7 @@ export const NotificaPrepSolicitacao = async (viagem: Viagem, col: Usuario) => {
                     </head>
                     <body>
                         <div class="container">
-                            <h2 style="margin-top:0;">Olá ${preposto.nome}, viagem solicitada</h2>
+                            <h2 style="margin-top:0;">Olá ${contrato.agentes.preposto.nome}, viagem solicitada</h2>
                             <table class="info-table">
                                 <tr>
                                     <th>Colaborador:</th>
@@ -651,7 +657,7 @@ export const NotificaPrepSolicitacao = async (viagem: Viagem, col: Usuario) => {
         }
         await addDoc(mailCol, mail);
     } catch (error: any) {
-
+        
     }
 }
 
@@ -659,15 +665,15 @@ export const NotificarCancelamento = async (viagem: Viagem) => {
     try {
         const viagemRef = doc(viagens, viagem.id.toString());
         await updateDoc(viagemRef, { status: 'Cancelar' });
-        const agenteE = await getAgente('emthos');
-        if(!agenteE) return;
+        const contrato = await getContrato(viagem.contrato);
+        if(!contrato) return;
         const col = await getUser(viagem.colaborador);
         let mail: Mail = {
-            to: [agenteE.email],
+            to: [contrato.agentes.interno.email],
             idViagem: viagem.id.toString(),
             acaoViagem: 'Solicitação de cancelamento',
             statusViagem: 'Cancelar',
-            agenteViagem: agenteE.nome,
+            agenteViagem: contrato.agentes.interno.nome,
             message: {
                 subject: `Solicitado cancelamento da viagem ID ${viagem.id}`,
                 text: '',
@@ -741,7 +747,7 @@ export const NotificarCancelamento = async (viagem: Viagem) => {
                     <body>
                         <div class="background-overlay"></div>
                         <div class="container">
-                            <h2 style="margin-top:0;">Olá ${agenteE.nome},</h2>
+                            <h2 style="margin-top:0;">Olá ${contrato.agentes.interno.nome},</h2>
                             <p>O colaborador ${col?.nomeAbreviado || viagem.colaborador} solicitou o cancelamento da viagem abaixo:</p>
                             <div class="button-group">
                                 <a
@@ -766,14 +772,14 @@ export const NotificarCancelamento = async (viagem: Viagem) => {
 
 export const NotificarCancelada = async (viagem: Viagem) => {
     try {
-        const prep = await getAgente('preposto');
-        if(!prep) return;
+        const contrato = await getContrato(viagem.contrato);
+        if(!contrato) return;
         let mail: Mail = {
-            to: [viagem.colaborador, prep.email],
+            to: [viagem.colaborador, contrato.agentes.preposto.email],
             idViagem: viagem.id.toString(),
             acaoViagem: 'Cancelamento',
             statusViagem: 'Cancelada',
-            agenteViagem:  prep.email,
+            agenteViagem:  contrato.agentes.preposto.email,
             message: {
                 subject: `Viagem ID ${viagem.id} - Cancelada`,
                 text: '',
@@ -872,14 +878,14 @@ export const NotificarCancelada = async (viagem: Viagem) => {
 
 export const NotificaPendentePrestacao = async (viagem: Viagem, difPrestacao: number, observacoes: string) => {
         try {
-        const preposto = await getAgente('preposto');
-        if (!preposto) return;
+        const contrato = await getContrato(viagem.contrato)
+        if (!contrato) return;
         let mail: Mail = {
-            to: [preposto.email, viagem.colaborador],
+            to: [contrato.agentes.preposto.email, viagem.colaborador],
             idViagem: viagem.id.toString(),
             acaoViagem: 'Pendente prestação de contas',
             statusViagem: viagem.status,
-            agenteViagem: preposto.nome,
+            agenteViagem: contrato.agentes.preposto.nome,
             message: {
                 subject: `Viagem ID ${viagem.id} - Revisão da prestação de contas`,
                 text: '',
@@ -963,17 +969,16 @@ export const NotificaPendentePrestacao = async (viagem: Viagem, difPrestacao: nu
     }
 }
 
-
 export const NotificaPreposto = async (viagem: Viagem) => {
         try {
-        const preposto = await getAgente('preposto');
-        if (!preposto) return;
+        const contrato = await getContrato(viagem.contrato);
+        if (!contrato) return;
         let mail: Mail = {
-            to: [preposto.email],
+            to: [contrato.agentes.preposto.email],
             idViagem: viagem.id.toString(),
             acaoViagem: 'Notif. Preposto',
             statusViagem: viagem.status,
-            agenteViagem: preposto.nome,
+            agenteViagem: contrato.agentes.preposto.nome,
             message: {
                 subject: `Viagem ID ${viagem.id} - ${viagem.status}`,
                 text: '',
@@ -1031,7 +1036,7 @@ export const NotificaPreposto = async (viagem: Viagem) => {
                     </head>
                     <body>
                         <div class="container">
-                            <h2 style="margin-top:0;">Olá ${preposto.nome},</h2>
+                            <h2 style="margin-top:0;">Olá ${contrato.agentes.preposto.nome},</h2>
                             <p>Viagem atualizada, status: ${viagem.status}</p>
                             <table class="info-table">
                                 <tr>
@@ -1095,18 +1100,17 @@ export const NotificaPreposto = async (viagem: Viagem) => {
 
 export const NotificarFinanceiroAdiantamento = async (viagem: Viagem) => {
     try {
-        const financeiro = await getAgente('financeiro');
-        const fin2 = await getAgente('financeiro2');
+        const contrato = await getContrato(viagem.contrato);
         const colaborador = await getUser(viagem.colaborador);
         const dataIdaViagem = parse(viagem.dataIda, "dd/MM/yyyy", new Date());
         const dataAdiantamento = subDays(dataIdaViagem, 3);
-        if (!financeiro || !colaborador || !fin2) return;
+        if (!contrato || !colaborador) return;
         let mail: Mail = {
-            to: [financeiro.email, fin2.email],
+            to: [contrato.agentes.financeiro.email, contrato.agentes.suplenteFinanceiro.email],
             idViagem: viagem.id.toString(),
             acaoViagem: 'Solicitação de adiantamento',
             statusViagem: viagem.status,
-            agenteViagem: financeiro.nome,
+            agenteViagem: contrato.agentes.financeiro.nome,
             message: {
                 subject: `Viagem ID ${viagem.id} - Solicitado adiantamento`,
                 text: '',
@@ -1167,7 +1171,7 @@ export const NotificarFinanceiroAdiantamento = async (viagem: Viagem) => {
                     </head>
                     <body>
                         <div class="container">
-                            <h2 style="margin-top:0;">Olá ${financeiro.nome},</h2>
+                            <h2 style="margin-top:0;">Olá ${contrato.agentes.financeiro.nome},</h2>
                             <p>Solicitado adiantamento no valor de R$ ${viagem.valorAdiantamento}. Data esperada para pagamento do adiantamento: ${format(dataAdiantamento, "dd/MM/yyyy")}</p>
                             <table class="info-table">
                                 <tr>
@@ -1217,7 +1221,7 @@ export const NotificarFinanceiroAdiantamento = async (viagem: Viagem) => {
                             </table>
                             <p>Para confirmar a programação do adiantamento, clique no link abaixo:</p>
                             <div class="button-group">
-                                <a class="btn-confirm" href="https://southamerica-east1-viagens-emthos.cloudfunctions.net/handleValorAdiantado?docId=${viagem.id}">
+                                <a class="btn-confirm" href="https://api-viagens-emthos.vercel.app/emails/handlervaloradiantado?docId=${viagem.id}">
                                     Valor adiantado
                                 </a>
                             </div>
@@ -1236,16 +1240,15 @@ export const NotificarFinanceiroAdiantamento = async (viagem: Viagem) => {
 
 export const NotificarFinanceiroPrestacao = async(viagem: Viagem, prestacao: PrestacaoContas, url: String) => {
     try {
-        const financeiro = await getAgente('financeiro');
-        const fin2 = await getAgente('financeiro2');
+        const contrato = await getContrato(viagem.contrato);
         const colaborador = await getUser(viagem.colaborador);
-        if (!financeiro || !colaborador || !fin2) return;
+        if (!contrato || !colaborador) return;
         let mail: Mail = {
-            to: [financeiro.email, fin2.email],
+            to: [contrato.agentes.financeiro.email, contrato.agentes.suplenteFinanceiro.email],
             idViagem: viagem.id.toString(),
             acaoViagem: 'Prestação de contas enviada',
             statusViagem: viagem.status,
-            agenteViagem: financeiro.nome,
+            agenteViagem: contrato.agentes.financeiro.nome,
             message: {
                 subject: `Viagem ID ${viagem.id} - Prestação de contas enviada`,
                 text: '',
@@ -1319,7 +1322,7 @@ export const NotificarFinanceiroPrestacao = async(viagem: Viagem, prestacao: Pre
                     <body>
                         <div class="background-overlay"></div>
                         <div class="container">
-                            <h2 style="margin-top:0;">Olá ${financeiro.nome},</h2>
+                            <h2 style="margin-top:0;">Olá ${contrato.agentes.financeiro.nome},</h2>
                             <p>
                             ${prestacao.valorDiferenca > 0 ?
                                 'Devolvido via pix o valor de R$ ' + prestacao.valorDiferenca
@@ -1372,7 +1375,7 @@ export const NotificarFinanceiroPrestacao = async(viagem: Viagem, prestacao: Pre
                                     Abrir comprovante pix
                                 </a>`
                                 :
-                                `<a class="btn-confirm" href="https://southamerica-east1-viagens-emthos.cloudfunctions.net/handleDescontoReembolso?docId=${viagem.id}&acao=reembolso">
+                                `<a class="btn-confirm" href="https://api-viagens-emthos.vercel.app/emails/handlerdescontoreembolso?docId=${viagem.id}&acao=reembolso">
                                     Notificar reembolso programado
                                 </a>`
                                 }
@@ -1381,7 +1384,6 @@ export const NotificarFinanceiroPrestacao = async(viagem: Viagem, prestacao: Pre
                         </div>
                     </body>
                     </html>
-                
                 `
             }
         }

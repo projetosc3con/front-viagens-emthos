@@ -28,17 +28,29 @@ export const getViagens = async (): Promise<Viagem[]> => {
     return lista;
 }
 
-export const getViagensColaborador = async (colaborador: string): Promise<Viagem[]> => {
-    const q = query(viagens, where("colaborador", "==", colaborador));
-    const snapshot = await getDocs(q);
-    const list: Viagem[] = [];
-    if(!snapshot.empty) {
-        snapshot.forEach(doc => {
-            list.push(doc.data() as Viagem);
-        })
-    } 
+export const getViagensContrato = async(contrato: string): Promise<Viagem[]> => {
+  const q = query(viagens, where("contrato", "==", contrato));
+  const snapshot = await getDocs(q);
+  const list: Viagem[] = [];
+  if(!snapshot.empty) {
+    snapshot.forEach(doc => {
+        list.push(doc.data() as Viagem);
+    })
+  } 
 
-    return list;
+  return list;
+}
+
+export const getViagensColaborador = async (colaborador: string): Promise<Viagem[]> => {
+  const q = query(viagens, where("colaborador", "==", colaborador));
+  const snapshot = await getDocs(q);
+  const list: Viagem[] = [];
+  if(!snapshot.empty) {
+    snapshot.forEach(doc => {
+        list.push(doc.data() as Viagem);
+    })
+  } 
+  return list;
 }
 
 export const addViagem = async (novo: Viagem): Promise<{ res: boolean, msg: string, id: number}> => {

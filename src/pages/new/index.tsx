@@ -5,7 +5,7 @@ import { StylesConfig } from 'react-select';
 import { useNavigate } from "react-router-dom";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { addViagem, getNextId } from "../../controller/Viagem";
-import Viagem from "../../types/Viagem";
+import Viagem, { processarCadastro, verificaConformidade } from "../../types/Viagem";
 import { parse, differenceInDays, format, differenceInCalendarDays, parseISO } from "date-fns";
 import { Alert, Modal } from "react-bootstrap";
 import { useUserContext } from "../../context/UserContext";
@@ -20,16 +20,9 @@ import { helperSolicitarViagem } from "../../controller/Helper";
 import { getGerencia } from "../../controller/Gerencia";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../util/FirebaseConnection";
+import Gerencia from "../../types/Gerencia";
 
 export type OptionType = { value: string; label: string };
-
-function isThirtyDaysOrMoreAhead(dataString: string): boolean {
-  const targetDate = parse(dataString, 'yyyy-MM-dd', new Date());
-  const today = new Date();
-
-  const diff = differenceInCalendarDays(targetDate, today);
-  return diff >= 10;
-}
 
 export function CitySelect({ onChange, value }: {
   onChange: (opt: OptionType) => void;
@@ -148,18 +141,19 @@ const New = () => {
 
         const fetchData = async () => {
             if (user?.nivelAcesso !== 'COL') {
+                //se não for colaborador requisitante busca a lista de usuarios
                 const snap = await getUsers();
-                setColaboradores(snap);
+                if (user?.nivelAcesso === 'ADM') {
+                    setColaboradores(snap);
+                } else {
+                    const filtered = snap.filter((u) => u.contrato === user?.contrato);
+                    setColaboradores(filtered);
+                }
             } else {
                 const input = document.getElementById('contrato') as HTMLInputElement | null;
-                if (input) {
-                    if (user.matriculaEmthos !== '') {
-                        input.value = user.matriculaEmthos;
-                        setNova({...nova, contrato: user.matriculaEmthos });
-                    } else {
-                        input.value = '4600680171';
-                        setNova({...nova, contrato: '4600680171' });
-                    }
+                if (input && user.contrato) {
+                    input.value = user.contrato;
+                    setNova({...nova, contrato: user.contrato });
                 }
             }
             const infoSnap = await helperSolicitarViagem();
@@ -167,7 +161,7 @@ const New = () => {
         }
 
         fetchData();
-    }, []);
+    }, [user]);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -193,39 +187,36 @@ const New = () => {
 
     const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(nova.duracao === 0) {
-            setMessage('Insira datas de ida e retorno válidas');
-            setShow(true);
-            return;
-        }
         if (!user) return;
+        let gerencia: Gerencia | null;
 
-        if(!isThirtyDaysOrMoreAhead(nova.dataIda) && user?.nivelAcesso === 'COL'){
-            setMessage('Sua viagem deve ser solicitada com no mínimo 10 dias de antecedência');
+        try {
+            //bloqueios encapsulados de acordo com contrato
+            await verificaConformidade(nova, user);
+
+            //se for colaborador cadastrando
+            if(user.nivelAcesso === 'COL') {
+                gerencia = await getGerencia(user.gerenciaPb);
+            } else {
+                const userRef = colaboradores.find(c => c.email === nova.colaborador)
+                if (!userRef) return;
+                gerencia = await getGerencia(userRef.gerenciaPb);
+            }
+            //Se for fluxo completo nao exibe a sub etapa e cadastra, se não for, exibe e aguarda a finalização
+            if (gerencia && gerencia.fluxoCompleto) {
+                const { res, msg } = await processarCadastro(nova, user, toggleLockBtn, preApr, anexo, colaboradores);
+                setRes(res);
+                setMessage(msg);
+                setToggle(false);
+                setShow(true);
+            } else {
+                setToggle(true);
+                setShow(true);
+            }
+        } catch (error) {
+            setMessage(error instanceof Error ? error.message : 'Erro ao cadastrar viagem');
+            setRes(false);
             setShow(true);
-            return;
-        }
-
-        if(user.nivelAcesso === 'COL') {
-            const gerSnap = await getGerencia(user.gerenciaPb);
-            if (gerSnap && gerSnap.fluxoCompleto) {
-                setToggle(false);
-                await cadastrar();
-            } else {
-                setToggle(true);
-                setShow(true);
-            }
-        } else {
-            const userRef = colaboradores.find(c => c.email === nova.colaborador)
-            if (!userRef) return;
-            const gerSnap = await getGerencia(userRef.gerenciaPb);
-            if (gerSnap && gerSnap.fluxoCompleto) {
-                setToggle(false);
-                await cadastrar();
-            } else {
-                setToggle(true);
-                setShow(true);
-            }
         }
     };
 
@@ -238,153 +229,15 @@ const New = () => {
             return;
         }
 
-        await cadastrar().then(() => {
-            setToggle(false);
-        });
-    }
-
-    const cadastrar = async () => {
-        if (!user) return;
-        await toggleLockBtn();
-        let url: string = '';
-
         try {
-            document.body.style.cursor = "wait";
-            //se for colaborador
-            if (user.nivelAcesso === 'COL') {
-                if (preApr && anexo) {
-                    const id = await getNextId();
-                    const fileRef = ref(storage, `viagens/${id}/evidencia-aprovacao`);
-                    
-                    const response = await fetch(anexo);
-                    const blob = await response.blob();  // Para imagens ou PDFs
-                    await uploadBytes(fileRef, blob);
-                    url = await getDownloadURL(fileRef);
-                }
-                const { res, msg, id } = await addViagem({ 
-                    ...nova, 
-                    duracao: nova.duracao + 1,
-                    colaborador: user.email,
-                    gerencia: user.gerenciaPb,
-                    dataIda: format(parseISO(nova.dataIda), 'dd/MM/yyyy'),
-                    dataVolta: format(parseISO(nova.dataVolta), 'dd/MM/yyyy'),
-                    dataSolicitacao: getCurrentDateTime().toString(),
-                    anexoAprovacao: url,
-                    status: preApr ? 'Aprovada' : 'Solicitada'
-                });
-                if (preApr) {
-                    await NotificarPreAprovada({ 
-                        ...nova, 
-                        id: id,
-                        duracao: nova.duracao + 1,
-                        colaborador: user.email,
-                        gerencia: user.gerenciaPb,
-                        dataIda: format(parseISO(nova.dataIda), 'dd/MM/yyyy'),
-                        dataVolta: format(parseISO(nova.dataVolta), 'dd/MM/yyyy'),
-                        dataSolicitacao: getCurrentDateTime().toString(),
-                        anexoAprovacao: url,
-                        status: 'Aprovada'
-                    })
-                } else {
-                    await NotificarSolicitacao({ 
-                        ...nova, 
-                        id: id,
-                        duracao: nova.duracao + 1,
-                        colaborador: user.email,
-                        gerencia: user.gerenciaPb,
-                        dataIda: format(parseISO(nova.dataIda), 'dd/MM/yyyy'),
-                        dataVolta: format(parseISO(nova.dataVolta), 'dd/MM/yyyy'),
-                        dataSolicitacao: getCurrentDateTime().toString()
-                    });
-                    await NotificaPreposto({ 
-                        ...nova, 
-                        id: id,
-                        duracao: nova.duracao + 1,
-                        colaborador: user.email,
-                        gerencia: user.gerenciaPb,
-                        dataIda: format(parseISO(nova.dataIda), 'dd/MM/yyyy'),
-                        dataVolta: format(parseISO(nova.dataVolta), 'dd/MM/yyyy'),
-                        dataSolicitacao: getCurrentDateTime().toString()
-                    });
-                }
-                setRes(res);
-                setMessage(msg);
-                setNova((prev) => ({...prev, id: id}));
-                setIdNova(id);
-                setShow(true);
-                document.body.style.cursor = "default";
-            } else {
-                //se for adm ou emthos
-                if (preApr && anexo) {
-                    const id = await getNextId();
-                    const fileRef = ref(storage, `viagens/${id}/evidencia-aprovacao`);
-                    
-                    const response = await fetch(anexo);
-                    const blob = await response.blob();  // Para imagens ou PDFs
-                    await uploadBytes(fileRef, blob);
-                    url = await getDownloadURL(fileRef);
-                }
-                const colb = colaboradores.find(c => c.email === nova.colaborador);
-                const { res, msg, id } = await addViagem({ 
-                    ...nova, 
-                    duracao: nova.duracao + 1,
-                    colaborador: colb?.email || nova.colaborador,
-                    gerencia: colb?.gerenciaPb || nova.gerencia,
-                    dataIda: format(parseISO(nova.dataIda), 'dd/MM/yyyy'),
-                    dataVolta: format(parseISO(nova.dataVolta), 'dd/MM/yyyy'),
-                    dataSolicitacao: getCurrentDateTime().toString(),
-                    anexoAprovacao: url,
-                    status: preApr ? 'Aprovada' : 'Solicitada'
-                });
-                if (preApr) {
-                    await NotificarPreAprovada({ 
-                        ...nova, 
-                        id: id,
-                        duracao: nova.duracao + 1,
-                        colaborador: user.email,
-                        gerencia: user.gerenciaPb,
-                        dataIda: format(parseISO(nova.dataIda), 'dd/MM/yyyy'),
-                        dataVolta: format(parseISO(nova.dataVolta), 'dd/MM/yyyy'),
-                        dataSolicitacao: getCurrentDateTime().toString(),
-                        anexoAprovacao: url,
-                        status: 'Aprovada'
-                    })
-                } else {
-                    await NotificarSolicitacao({ 
-                        ...nova, 
-                        id: id, 
-                        gerencia: colb?.gerenciaPb || nova.gerencia,
-                        duracao: nova.duracao + 1,
-                        colaborador: colb?.email || nova.colaborador,
-                        dataIda: format(parseISO(nova.dataIda), 'dd/MM/yyyy'),
-                        dataVolta: format(parseISO(nova.dataVolta), 'dd/MM/yyyy'),
-                        dataSolicitacao: getCurrentDateTime().toString()
-                    });   
-                    await NotificaPreposto({ 
-                        ...nova, 
-                        id: id,
-                        duracao: nova.duracao + 1,
-                        colaborador: colb?.email || nova.colaborador,
-                        gerencia: colb?.gerenciaPb || nova.gerencia,
-                        dataIda: format(parseISO(nova.dataIda), 'dd/MM/yyyy'),
-                        dataVolta: format(parseISO(nova.dataVolta), 'dd/MM/yyyy'),
-                        dataSolicitacao: getCurrentDateTime().toString()
-                    });
-                }
-                setRes(res);
-                setMessage(msg);
-                setNova((prev) => ({...prev, id: id}));
-                setIdNova(id);
-                document.body.style.cursor = "default";
-            }
-
+            const { res, msg } = await processarCadastro(nova, user, toggleLockBtn, preApr, anexo, colaboradores);
+            setRes(res);
+            setMessage(msg);
+            setToggle(false);
             setShow(true);
-        } catch (error: any) {
-            await toggleLockBtn();
-            setRes(false);
-            setMessage('Erro ao solicitar viagem: ' + error.message);
+        } catch (error) {
+            setMessage(error instanceof Error ? error.message : 'Erro ao cadastrar viagem');
             setShow(true);
-            document.body.style.cursor = "default";
         }
     }
 
@@ -510,7 +363,7 @@ const New = () => {
                             <div className="row">
                                 <div className="form-group mb-4 col-8 col-sm-5">
                                     <label htmlFor="contrato">Contrato</label>
-                                    <input type="text" id="contrato" required onChange={handleChange} name="contrato" value={nova.contrato} />
+                                    <input type="text" id="contrato" required onChange={handleChange} name="contrato" value={nova.contrato} disabled={user?.nivelAcesso === 'COL'}/>
                                 </div>
                                 <div className="form-group mb-4 col-8 col-sm-4">
                                     <label htmlFor="origem">Centro de custo</label>

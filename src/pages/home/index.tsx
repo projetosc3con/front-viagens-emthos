@@ -5,7 +5,7 @@ import TabelaViagens from "../../components/tabelaViagens";
 import { useUserContext } from "../../context/UserContext";
 import { useEffect, useState } from "react";
 import Viagem, { StatusCount } from "../../types/Viagem";
-import { getPieChart, getViagens, getViagensColaborador } from "../../controller/Viagem";
+import { getPieChart, getViagens, getViagensColaborador, getViagensContrato } from "../../controller/Viagem";
 import { Spinner } from "react-bootstrap";
 import { compareAsc, isAfter, parse } from "date-fns";
 
@@ -43,6 +43,11 @@ const Home = () => {
                 setChartData(pieData);
                 const proxima = obterProximaViagem(snap);
                 setProx(proxima);
+            } else if (user.nivelAcesso === 'PRP') {
+                const snap = await getViagensContrato(user.contrato ?? '');
+                setViagens(snap);
+                const pieData = await getPieChart(snap);
+                setChartData(pieData);
             } else {
                 const snap = await getViagens();
                 setViagens(snap);

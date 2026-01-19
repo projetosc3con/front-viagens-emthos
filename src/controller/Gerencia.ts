@@ -8,7 +8,7 @@ export const getGerencias = async (): Promise<Gerencia[]> => {
     const lista: Gerencia[] = [];
     
     snapshot.forEach(doc => {
-        lista.push({ ...doc.data() as Gerencia, idDoc: doc.id});
+        lista.push({ ...doc.data() as Gerencia, id: doc.id});
     });
 
     return lista;

@@ -118,7 +118,7 @@ const ViagemPrestacao = () => {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-        const validTypes = ["image/png", "image/jpeg", "image/jpg"];
+        const validTypes = ["image/png", "image/jpeg", "image/jpg", "application/pdf"];
         if (validTypes.includes(file.type)) {
             const reader = new FileReader();
             reader.onload = () => {
@@ -126,7 +126,7 @@ const ViagemPrestacao = () => {
             };
             reader.readAsDataURL(file);
         } else {
-            alert("Por favor, selecione um arquivo de imagem válido (PNG, JPG ou JPEG).");
+            alert("Por favor, selecione um arquivo válido (PNG, JPG, JPEG, ou PDF).");
         }
         }
     };
@@ -437,8 +437,8 @@ const ViagemPrestacao = () => {
                                                 />
                                             </div>
                                             <div className="form-group col-6 mb-4">
-                                                <label htmlFor="image">Imagem da nota</label>
-                                                <input className="form-control" type="file" id="image" accept=".png, .jpg, .jpeg" onChange={handleFileChange}/>
+                                                <label htmlFor="image">Imagem ou PDF da nota</label>
+                                                <input className="form-control" type="file" id="image" accept=".png, .jpg, .jpeg, .pdf" onChange={handleFileChange}/>
                                             </div>
                                             <div className="form-group mb-4">
                                                 <button className="btn btn-danger" type="submit"><i className="bi bi-floppy-fill me-2"/>Enviar</button>

@@ -1,9 +1,10 @@
 type Gerencia = {
-    idDoc: string;
+    id?: string;
     nome: string;
     aprovador: string;
     colaboradores: number;
     fluxoCompleto: boolean;
+    contrato: string;
 }
 
 export default Gerencia;

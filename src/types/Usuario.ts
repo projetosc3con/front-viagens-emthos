@@ -1,12 +1,14 @@
 type Usuario = {
-    uid: string;
-    email: string;
-    cpf: string;
-    nomeCompleto: string;
-    nomeAbreviado: string;
-    nivelAcesso: string; /* COL (colaborador), PBS (aprovadores), APB (Agente de viagens petrobras), AEM (Agente de viagens Emthos), ADM (Administrador, preposto) */
-    gerenciaPb: string;
-    matriculaEmthos: string;
+  uid: string;
+  email: string;
+  cpf: string;
+  nomeCompleto: string;
+  nomeAbreviado: string;
+  nivelAcesso: string; /* COL (colaborador), PBS (aprovadores), APB (Agente de viagens petrobras), AEM (Agente de viagens Emthos), ADM (Administrador, preposto) */
+  gerenciaPb: string;
+  matriculaEmthos: string;
+  itemPPU?: number;
+  contrato?: string;
 }
 
 export const nomeAbreviado = (fullName: string): string => {

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { storage } from '../../util/FirebaseConnection';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { Spinner } from 'react-bootstrap';
+import { useUserContext } from '../../context/UserContext';
 
 interface FileItem {
   name: string;
@@ -13,11 +14,12 @@ const RelatoriosList: React.FC = () => {
   const [files, setFiles] = useState<FileItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useUserContext();
 
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const listRef = ref(storage, 'relatorios/');
+        const listRef = ref(storage, 'relatorios/'+user?.contrato+'/');
         const res = await listAll(listRef);
         const items = res.items;
         const filePromises = items.map(async itemRef => {

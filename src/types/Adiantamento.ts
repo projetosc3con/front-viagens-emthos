@@ -5,7 +5,7 @@ type Adiantamento = {
     totalAdiantamento: number;
 }
 
-type ItemAdiantamento = {
+export type ItemAdiantamento = {
     alimentacao: number;
     deslocamento: number;
     total: number;

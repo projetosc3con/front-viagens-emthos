@@ -1,4 +1,3 @@
-import Agentes from "../../components/agentes"
 import Gerencias from "../../components/gerencias"
 import { getDownloadURL, ref as storageRef } from "firebase/storage";
 import { storage } from "../../util/FirebaseConnection";
@@ -41,19 +40,6 @@ const Configuracoes = () => {
         return (
             <div>
                 <div className="row">
-                    <div className="col-12 col-md-6 col-lg-7 col-xxl-8 px-3 mb-5">
-                        <h2>Agentes</h2>
-                        <hr/>
-                        <div id="agentes-container">
-                            <Agentes/>
-                        </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-lg-5 col-xxl-4 px-4">
-                        <h2>Gerências</h2>
-                        <hr />
-                        <Gerencias/>
-                    </div>
-                    <hr/>
                     <div className="col-12 col-md-6 mb-4">
                         <h2>Atualizar viagens</h2>
                         <p className="text-ease">Confere viagens finalizadas com prestação de contas pendente, viagens com acerto financeiro pendente e se viagens em andamento possuem ou não solicitação de adiantamento</p>

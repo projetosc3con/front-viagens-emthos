@@ -6,7 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import { useRef, useState, useEffect } from "react";
-import { getViagens, getViagensColaborador } from "../../controller/Viagem";
+import { getViagens, getViagensColaborador, getViagensContrato } from "../../controller/Viagem";
 import { useUserContext } from "../../context/UserContext";
 
 const List = () => {
@@ -419,6 +419,9 @@ const List = () => {
             if(user){
               if(user.nivelAcesso === 'COL') {
                 const data = await getViagensColaborador(user.email);
+                setViagens(data);
+              } else if (user.nivelAcesso === 'PRP') { 
+                const data = await getViagensContrato(user.contrato ?? '');
                 setViagens(data);
               } else {
                 const data = await getViagens();

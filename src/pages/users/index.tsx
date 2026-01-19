@@ -1,9 +1,8 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { addUser, deleteUser, getUsers, limiteDeUsers, updateUser } from "../../controller/Usuario";
 import Usuario, { nomeAbreviado } from "../../types/Usuario";
 import { useUserContext } from "../../context/UserContext";
 import { customSelectStyles, ListBox } from "./styles";
-import InputMask from 'react-input-mask';
 import Select, { SingleValue, components } from 'react-select';
 import Gerencia from "../../types/Gerencia";
 import { diminuirColaborador, getGerencias, incluirColaborador } from "../../controller/Gerencia";
@@ -12,6 +11,8 @@ import SearchFilter from "../../components/searchFilter";
 import Caret from "../../components/caret";
 import Helper, { HelperProps } from "../../components/helper";
 import { helperUsuarios } from "../../controller/Helper";
+import api from "../../api";
+import Contrato from "../../types/Contrato";
 
 type OptionType = { value: string; label: string };
 
@@ -32,6 +33,8 @@ const Users = () => {
     const [info, setInfo] = useState<HelperProps>();
     const options = ['E-mail', 'Nome', 'Gerência', 'Acesso'];
     const [selected, setSelected] = useState<string>(options[0]);
+    const [contratos, setContratos] = useState<Contrato[]>([]);
+    const [ativos, setAtivos] = useState(false);
     const [novoEditado, setNovoEditado] = useState<Usuario>({
         uid: 'Pendente',
         email: '',
@@ -40,19 +43,24 @@ const Users = () => {
         nomeAbreviado: '',
         nivelAcesso: '',
         gerenciaPb: 'N/A',
-        matriculaEmthos: 'N/A'
+        matriculaEmthos: 'N/A',
+        contrato: 'N/A'
     });
     const nivelOptions = [
         { value: '', label: 'Selecione...'},
         { value: 'COL', label: 'Colaborador' },
+        { value: 'PRP', label: 'Preposto de contrato'},
         // { value: 'PBS', label: 'Aprovador' },
         //{ value: 'APB', label: 'Agente Petrobras' },
-        { value: 'AEM', label: 'Agente Emthos' },
-        { value: 'ADM', label: 'Administrador' }
+        { value: 'AEM', label: 'Agente Emthos' }
     ]
     const gerenciasOptions = [
-    { value: '', label: 'Selecione...' },
-    ...gerencias.map((gerencia) => ({ value: gerencia.nome, label: gerencia.nome }))
+        { value: '', label: 'Selecione...' },
+        ...gerencias.map((gerencia) => ({ value: gerencia.nome, label: gerencia.nome }))
+    ];
+    const contratosOptions = [
+        { value: '', label: 'Selecione...' },
+        ...contratos.map((contrato) => ({ value: contrato.nroContrato, label: contrato.nroContrato }))
     ];
     const [sort, setSort] = useState<Sort>({ keyToSort: 'nomeAbreviado', direction: 'asc'});
     const headers = [
@@ -95,27 +103,38 @@ const Users = () => {
             const aValue = a[sort.keyToSort];
             const bValue = b[sort.keyToSort];
 
+            if (aValue == null && bValue == null) return 0;
+            if (aValue == null) return 1;
+            if (bValue == null) return -1;
+
             if (aValue > bValue) return sort.direction === 'asc' ? 1 : -1;
             if (aValue < bValue) return sort.direction === 'asc' ? -1 : 1;
             return 0;
         });
     }
+
+    const fetchData = async() => {
+        if (!user) return;
+        const dataU = await getUsers();
+        const grs = await getGerencias();
+        const { data } = await api.get<Contrato[]>('/contratos');
+        const infoSnap = await helperUsuarios();
+        //se não for ADM é PRP, e se for PRP trás apenas os usuarios e gerencias do contrato
+        if (user.nivelAcesso !== 'ADM') {
+            setUsers(dataU.filter((u) => u.contrato === user.contrato));
+            setGerencias(grs.filter((g) => g.contrato === user.contrato));
+            setContratos(data.filter((c) => c.nroContrato === user.contrato));
+        } else {
+            setUsers(dataU);
+            setGerencias(grs);
+            setContratos(data);
+        }
+        setInfo(infoSnap);
+    }
  
     useEffect(() => {
-        if (hasFetchedData.current) return;
-        hasFetchedData.current = true;
-
-        const fetchData = async() => {
-            const data = await getUsers();
-            setUsers(data);
-            const grs = await getGerencias();
-            setGerencias(grs);
-            const infoSnap = await helperUsuarios();
-            setInfo(infoSnap);
-        }
-
         fetchData();
-    })
+    }, [user]);
 
     const carregarUser = (user: Usuario) => {
         setNovoEditado({
@@ -126,7 +145,8 @@ const Users = () => {
             nomeAbreviado: user.nomeAbreviado,
             nivelAcesso: user.nivelAcesso,
             gerenciaPb: user.gerenciaPb,
-            matriculaEmthos: user.matriculaEmthos
+            matriculaEmthos: user.matriculaEmthos,
+            contrato: user.contrato
         });
     }
 
@@ -190,7 +210,8 @@ const Users = () => {
             nomeAbreviado: '',
             nivelAcesso: '',
             gerenciaPb: 'N/A',
-            matriculaEmthos: 'N/A'
+            matriculaEmthos: 'N/A',
+            contrato: 'N/A'
         });
     }
 
@@ -200,6 +221,7 @@ const Users = () => {
                 ...prev,
                 gerenciaPb: selected?.value === 'COL' ? '' : 'N/A',
                 matriculaEmthos: selected?.value === 'COL' ? '' : selected?.value === 'AEM' ? '' : 'N/A',
+                contrato: selected?.value === 'COL' ? '' : selected?.value === 'PRP' ? '': 'N/A',
                 [fieldName]: selected?.value || ''
             }));
         } else {
@@ -225,13 +247,13 @@ const Users = () => {
             const idx = users.findIndex(u => u.email === novoEditado.email);
             if (novoEditado.uid === 'Pendente' && idx === -1) {
                 //se chegou no limite não deixa incluir
-                const limite = await limiteDeUsers();
+                /* const limite = await limiteDeUsers();
                 if(limite) {
                     setRes(false);
                     setMessage('Limite de usuários atingido');
                     setShow(true);  
                     return;  
-                }
+                } */
 
                 const { res, msg } = await addUser(novoEditado);
                 await incluirColaborador(novoEditado.gerenciaPb);
@@ -260,7 +282,34 @@ const Users = () => {
         }
     }
 
-    if (user && user.nivelAcesso !== 'ADM') {
+    const filteredUsers = useMemo(() => {
+        return getSortedArray(users).filter((item) => {
+            if (ativos && item.uid === "Pendente") {
+                return false;
+            }
+
+            if (filter.trim() === "") return true;
+
+            const value = filter.toLowerCase();
+
+            if (selected === options[0]) {
+                return item.email.toLowerCase().includes(value);
+            }
+
+            if (selected === options[1]) {
+                return item.nomeAbreviado.toLowerCase().includes(value);
+            }
+
+            if (selected === options[2]) {
+                return item.gerenciaPb.toLowerCase().includes(value);
+            }
+
+            return item.nivelAcesso.toLowerCase().includes(value);
+        });
+    }, [users, filter, selected, ativos]);
+
+
+    if (!user || (user.nivelAcesso !== 'ADM' && user.nivelAcesso !== 'PRP')) {
         return (
             <>
                 Sem acesso
@@ -307,6 +356,20 @@ const Users = () => {
                                         noOptionsMessage={() => "Não encontrado"}
                                     />
                                 </div>
+                                {novoEditado.contrato !== 'N/A' && 
+                                <div className="mb-4 col-12">
+                                    <div className="form-group">
+                                        <label htmlFor="contrato">Contrato</label>
+                                    </div>
+                                    <Select
+                                        name="contrato"
+                                        value={contratosOptions.find(opt => opt.value === novoEditado.contrato)  || contratosOptions[0]}
+                                        onChange={handleSelectChange("contrato")}
+                                        options={contratosOptions}
+                                        styles={customSelectStyles()}
+                                        noOptionsMessage={() => "Não encontrado"}
+                                    />
+                                </div>}
                                 {novoEditado.gerenciaPb !== 'N/A' && 
                                 <div className="mb-4 col-12">
                                     <div className="form-group">
@@ -320,11 +383,6 @@ const Users = () => {
                                         styles={customSelectStyles()}
                                         noOptionsMessage={() => "Não encontrado"}
                                     />
-                                </div>}
-                                {novoEditado.matriculaEmthos !== 'N/A' && 
-                                <div className="form-group mb-4 col-12">
-                                    <label htmlFor="matriculaEmthos">Contrato</label>
-                                    <input type="text" id="matriculaEmthos" name="matriculaEmthos" placeholder="Insira a matrícula do usuário" onChange={handleChange} value={novoEditado.matriculaEmthos}/>
                                 </div>}
                                 <div className="d-flex justify-content-between">
                                     <button type="submit" className="btn btn-danger">
@@ -349,8 +407,15 @@ const Users = () => {
                         </div>
                     </div>
                     <ListBox className="card col-12 col-lg-8">
-                        <div className="col-12 col-lg-4">
-                            <SearchFilter valor={filter} setValor={setFilter} opcoes={options} selecionado={selected} setSelecionado={setSelected}/>         
+                        <div className="d-flex justify-content-between">
+                            <div className="col-12 col-lg-4 my-auto">
+                                <SearchFilter valor={filter} setValor={setFilter} opcoes={options} selecionado={selected} setSelecionado={setSelected}/>
+                            </div>
+                            <div className="form-check form-switch my-auto">
+                                <input className="form-check-input" type="checkbox" role="switch" id="ativos" checked={ativos} onClick={() => setAtivos(!ativos)}/>
+                                <label className="form-check-label" htmlFor="ativos">Apenas ativos</label>
+                            </div>
+                            <div className="d-flex my-auto">{filteredUsers.length}<i className="bi bi-people-fill ms-2"></i></div>
                         </div>
                         <div className="card-body table-responsive">
                                 <table className="table table-dark table-striped-columns table-hover">
@@ -367,17 +432,7 @@ const Users = () => {
                                         </tr>
                                     </thead>
                                 <tbody>
-                                    {getSortedArray(users).filter((item) => {
-                                        if(selected === options[0]){
-                                            return filter.toLowerCase() === '' ? item : item.email.toLowerCase().includes(filter);
-                                        } else if (selected === options[1]){
-                                            return filter.toLowerCase() === '' ? item : item.nomeAbreviado.toLowerCase().includes(filter);
-                                        } else if (selected === options[2]) {
-                                            return filter.toLowerCase() === '' ? item : item.gerenciaPb.toLowerCase().includes(filter);
-                                        } else {
-                                            return filter.toLowerCase() === '' ? item : item.nivelAcesso.toLowerCase().includes(filter);
-                                        } 
-                                    }).map((row, index) => (
+                                    {filteredUsers.map((row, index) => (
                                         <tr key={index}>
                                             <td>{row.email}</td>
                                             <td>{row.nomeAbreviado}</td>
@@ -385,8 +440,18 @@ const Users = () => {
                                             <td>{row.nivelAcesso}</td>
                                             <td>
                                                 <div className="d-flex">
-                                                    <button className="btn btn-primary" onClick={() => carregarUser(row)}><i className="bi bi-pencil"/></button>
-                                                <button className="btn btn-danger" onClick={() => deletar(row.email)}><i className="bi bi-trash3"/></button>
+                                                <button
+                                                    className="btn btn-primary"
+                                                    onClick={() => carregarUser(row)}
+                                                >
+                                                    <i className="bi bi-pencil" />
+                                                </button>
+                                                <button
+                                                    className="btn btn-danger"
+                                                    onClick={() => deletar(row.email)}
+                                                >
+                                                    <i className="bi bi-trash3" />
+                                                </button>
                                                 </div>
                                             </td>
                                         </tr>

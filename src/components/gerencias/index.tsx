@@ -39,7 +39,7 @@ const Gerencias = () => {
                     list.push({
                         files: d.colaboradores,
                         path: d.nome,
-                        id: d.idDoc
+                        id: d.id ?? ''
                     });
                 })
                 setFolderPaths(list);
@@ -60,7 +60,7 @@ const Gerencias = () => {
                 list.push({
                     files: d.colaboradores,
                     path: d.nome,
-                    id: d.idDoc
+                    id: d.id ?? ''
                 });
             })
             setFolderPaths(list);
@@ -68,12 +68,12 @@ const Gerencias = () => {
         }
     }
 
-    const handleAprovadorChange = (idDoc: string, novoEmail: string) => {
+    const handleAprovadorChange = (id: string, novoEmail: string) => {
         if (!edited) return;
         setEdited({ ...edited, aprovador: novoEmail });
     };
 
-    const handleFluxoChange = (e: React.ChangeEvent<HTMLInputElement>, idDoc: string) => {
+    const handleFluxoChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
         const { type } = e.target;
         if(!edited) return;
         setEdited({ 
@@ -82,11 +82,11 @@ const Gerencias = () => {
         });
     }
 
-    const editarAprovador = async (idDoc: string, gerencia: Gerencia | null | undefined) => {
+    const editarAprovador = async (id: string, gerencia: Gerencia | null | undefined) => {
         if (!gerencia) return;
 
         try {
-            const docRef = doc(Gers, idDoc);
+            const docRef = doc(Gers, id);
             await updateDoc(docRef, { 
                 aprovador: gerencia.aprovador,
                 fluxoCompleto: gerencia.fluxoCompleto
@@ -102,8 +102,8 @@ const Gerencias = () => {
         }
     }
 
-    const handleShowForm = (idDoc: string) => {
-        const ger = gerencias.find(g => g.idDoc === idDoc);
+    const handleShowForm = (id: string) => {
+        const ger = gerencias.find(g => g.id === id);
         if(ger) {
             setEdited(ger);
         } else {
@@ -127,25 +127,25 @@ const Gerencias = () => {
 
 
                 {/* {gerencias.map((item, index) => (
-                    <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={index} id={item.idDoc}>
+                    <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={index} id={item.id}>
                         <div className="card">
                             <div className="card-body">
                                 <h5>{item.nome}</h5>
                                 <div className="form-group mb-3">
                                     <label htmlFor="aprovador">Aprovador</label>
-                                    <input type="text" id="aprovador" name="aprovador" placeholder="E-mail do aprovador" value={item.aprovador} onChange={e => handleAprovadorChange(item.idDoc, e.target.value)} required/>
+                                    <input type="text" id="aprovador" name="aprovador" placeholder="E-mail do aprovador" value={item.aprovador} onChange={e => handleAprovadorChange(item.id, e.target.value)} required/>
                                 </div>
                                 <div className="form-group">
                                     <label>Compra de viagens</label>
                                     <div className="form-check form-switch ms-2">
-                                        <input type="checkbox" className="form-check-input" name="fluxoCompleto" checked={item.fluxoCompleto} onChange={(e) => handleFluxoChange(e, item.idDoc)}/>
+                                        <input type="checkbox" className="form-check-input" name="fluxoCompleto" checked={item.fluxoCompleto} onChange={(e) => handleFluxoChange(e, item.id)}/>
                                     </div>
                                 </div>
                             </div>
                             <div className="card-footer">
                                 <div className="d-flex justify-content-between">
                                     <small className="fw-lighter">Colaboradores: {item.colaboradores}</small>
-                                    <i className="bi bi-pencil" onClick={() => editarAprovador(item.idDoc, item)}/>
+                                    <i className="bi bi-pencil" onClick={() => editarAprovador(item.id, item)}/>
                                 </div>
                             </div>
                         </div>
@@ -161,12 +161,12 @@ const Gerencias = () => {
                             <h5>{edited?.nome}</h5>
                             <div className="form-group mb-3">
                                 <label htmlFor="aprovador">Aprovador</label>
-                                <input type="text" id="aprovador" name="aprovador" placeholder="E-mail do aprovador" value={edited?.aprovador || ''} onChange={e => handleAprovadorChange(edited?.idDoc || '', e.target.value)} required/>
+                                <input type="text" id="aprovador" name="aprovador" placeholder="E-mail do aprovador" value={edited?.aprovador || ''} onChange={e => handleAprovadorChange(edited?.id || '', e.target.value)} required/>
                             </div>
                             <div className="form-group mb-3">
                                 <label>Compra de viagens</label>
                                 <div className="form-check form-switch ms-2">
-                                    <input type="checkbox" className="form-check-input" name="fluxoCompleto" checked={edited?.fluxoCompleto} onChange={(e) => handleFluxoChange(e, edited?.idDoc || '')}/>
+                                    <input type="checkbox" className="form-check-input" name="fluxoCompleto" checked={edited?.fluxoCompleto} onChange={(e) => handleFluxoChange(e, edited?.id || '')}/>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@ const Gerencias = () => {
                         {show && <Alert className="mt-2" variant={res ? 'success' : 'danger'} onClose={() => setShow(false)} dismissible>{message}</Alert>}
                     </Modal.Body>
                     <Modal.Footer>
-                        <button className="btn btn-danger" onClick={() => editarAprovador(edited?.idDoc || '', edited)}><i className="bi bi-floppy me-2" />Alterar</button>
+                        <button className="btn btn-danger" onClick={() => editarAprovador(edited?.id || '', edited)}><i className="bi bi-floppy me-2" />Alterar</button>
                     </Modal.Footer>
                 </Modal>
             </Container>

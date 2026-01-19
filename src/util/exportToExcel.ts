@@ -74,7 +74,7 @@ export async function exportViagensComPrestacoes(
   ];
   ws.columns = columns;
 
-  const relatoriosRoot = ref(storage, 'relatorios/');
+  const relatoriosRoot = ref(storage, 'relatorios/'+contrato+'/');
   const list = await listAll(relatoriosRoot);
   const nextIndex = list.items.length + 1;
 
@@ -180,7 +180,7 @@ export async function exportViagensComPrestacoes(
   const hoje = new Date();
   const hojeStr = format(hoje, "dd-MM-yyyy");
   const fileName = `Relatório_${nextIndex}_${hojeStr}.xlsx`;
-  const destinoRef = ref(storage, `relatorios/${fileName}`);
+  const destinoRef = ref(storage, `relatorios/${contrato}/${fileName}`);
 
   // 10) faz o upload
   const blob = new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });

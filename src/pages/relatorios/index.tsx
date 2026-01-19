@@ -4,13 +4,13 @@ import { exportViagensComPrestacoes } from "../../util/exportToExcel";
 import { format, parseISO } from 'date-fns';
 import { storage } from "../../util/FirebaseConnection";
 import { getDownloadURL, ref } from "firebase/storage";
-import { getViagens } from "../../controller/Viagem";
+import { getViagens, getViagensContrato } from "../../controller/Viagem";
 import Viagem from "../../types/Viagem";
 import { customSelectStyles } from "../new/styles";
 import Select, { SingleValue } from 'react-select';
 import Helper, { HelperProps } from "../../components/helper";
 import { helperExport, helperMedicao } from "../../controller/Helper";
-
+import { useUserContext } from "../../context/UserContext";
 
 type OptionType = { value: string; label: string };
 
@@ -30,27 +30,35 @@ async function doBackup(
   return data.zipPath;
 }
 
-
 const Relatorios = () => {
     const [dataInicioIso, setDataInicioIso] = useState<string>('');
     const [dataFimIso, setDataFimIso] = useState<string>('');
-    const [contrato, setContrato] = useState<string>('4600680171');
+    const [contrato, setContrato] = useState<string>('');
     const [viagens, setViagens] = useState<Viagem[]>([]);
     const [viagemBackup, setViagemBackup] = useState('');
     const [info, setInfo] = useState<HelperProps>();
     const [info2, setInfo2] = useState<HelperProps>();
+    const { user } = useUserContext();
 
     useEffect(() => {
         const fetchData = async () => {
-            const snap = await getViagens();
-            setViagens(snap);
-            const infoSnap = await helperMedicao();
-            setInfo(infoSnap);
-            const infoSnap2 = await helperExport();
-            setInfo2(infoSnap2);
+            if (user) {
+                if (user.nivelAcesso === 'ADM') {
+                    const snap = await getViagens();
+                    setViagens(snap);
+                } else {
+                    const snap = await getViagensContrato(user.contrato ?? '');
+                    setViagens(snap);
+                    setContrato(user.contrato ?? '');
+                }
+                const infoSnap = await helperMedicao();
+                setInfo(infoSnap);
+                const infoSnap2 = await helperExport();
+                setInfo2(infoSnap2);
+            }
         }
         fetchData();
-    }, []);
+    }, [user]);
 
     const viagensOp = [
         { value: '', label: 'Selecione...' },
@@ -129,6 +137,7 @@ const Relatorios = () => {
                         type="text"
                         className="form-control"
                         value={contrato}
+                        disabled={user?.nivelAcesso !== 'ADM' ? true : false}
                         onChange={e => setContrato(e.currentTarget.value)}
                     />
                 </div>
